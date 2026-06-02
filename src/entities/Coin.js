@@ -5,11 +5,15 @@
  *   - rotasi 360 derajat (terlihat berputar)
  *   - pulsing scale (berkilat seperti spin 3D dari samping)
  *
- * Y POSISI TETAP — tidak ada tween Y, supaya koin tidak drift
- * (tween Y pernah bentrok dengan deteksi onFloor / body).
+ * POSISI DIKUNCI LAPIS BERLAPIS untuk mencegah koin jatuh:
+ *   1. setImmovable(true)
+ *   2. setAllowGravity(false)
+ *   3. setGravity(0, 0)            -- eksplisit
+ *   4. setVelocity(0, 0)            -- no velocity drift
+ *   5. setSize(28, 28) + offset 0   -- body match texture
+ *   6. updateFromGameObject()       -- sync body ke sprite
  *
  * collected() dipanggil dari GameScene.collectCoin():
- *   - matikan body
  *   - kill semua tween
  *   - tween mengecil lalu menghilang
  *   - hancurkan objek
@@ -22,18 +26,25 @@ export default class Coin extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     this.value = 10;
+
+    // ---- POSITION LOCK (6 lapis) ----
     this.setImmovable(true);
     this.body.setAllowGravity(false);
+    this.body.setGravity(0, 0);
+    this.body.setVelocity(0, 0);
+    this.body.setSize(28, 28);
+    this.body.setOffset(0, 0);
+    this.body.updateFromGameObject();
 
-    // animasi rotasi penuh (seperti spin 3D dari samping)
+    // ---- ANIMASI (TIDAK menyentuh Y) ----
+    // rotasi penuh
     scene.tweens.add({
       targets: this,
       angle: 360,
       duration: 900,
       repeat: -1
     });
-    // pulsing skala (berkilat) — TIDAK menyentuh Y, supaya posisi
-    // koin tetap fixed dan tidak drift (Fase polish 2)
+    // pulsing scale (berkilat)
     scene.tweens.add({
       targets: this,
       scaleX: { from: 1, to: 0.4 },
@@ -48,7 +59,6 @@ export default class Coin extends Phaser.Physics.Arcade.Sprite {
   collect() {
     if (!this.active) return;
     this.body.setEnable(false);
-    // stop semua tween yang sedang berjalan pada objek ini
     this.scene.tweens.killTweensOf(this);
     this.scene.tweens.add({
       targets: this,

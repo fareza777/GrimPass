@@ -6,6 +6,8 @@
  *   Boot -> Preload -> Intro -> LevelSelect -> Game
  *           Game -> CutScene -> Game (untuk level 10,20,...,90)
  *           Game -> EndingScene (setelah level 100)
+ *
+ * Scale.FIT: canvas scale responsif untuk mobile (tetap 4:3)
  * ---------------------------------------------------------------
  */
 import BootScene from './scenes/BootScene.js';
@@ -16,7 +18,6 @@ import GameScene from './scenes/GameScene.js';
 import CutScene from './scenes/CutScene.js';
 import EndingScene from './scenes/EndingScene.js';
 
-// asumsi: canvas 800x600 adalah ukuran standar untuk game retro
 const config = {
   type: Phaser.AUTO,
   width: 800,
@@ -24,10 +25,17 @@ const config = {
   parent: 'game-container',
   backgroundColor: '#87CEEB',
   pixelArt: true,
+  // asumsi: FIT mode scale canvas agar pas di mobile/desktop,
+  // tetap menjaga rasio 4:3 dengan letterbox jika perlu
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    width: 800,
+    height: 600
+  },
   physics: {
     default: 'arcade',
     arcade: {
-      // asumsi: gravitasi 800px/s^2 memberikan feel Mario-like
       gravity: { y: 800 },
       debug: false
     }
@@ -46,7 +54,7 @@ const config = {
 window.addEventListener('load', () => {
   try {
     const game = new Phaser.Game(config);
-    window.__game = game; // expose untuk debugging
+    window.__game = game;
   } catch (err) {
     const el = document.getElementById('game-container');
     if (el) {
