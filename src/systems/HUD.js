@@ -65,12 +65,12 @@ export default class HUD {
 
     // ========== Baris 1: NYAWA (kiri) + SKOR (kanan) ==========
     const r1 = panelY + 22;
-    this.livesLbl = this.scene.add.text(cx - panelW / 4, r1 - 13, 'JIWA', lbl)
+    this.livesLbl = this.scene.add.text(cx - panelW / 4, r1 - 13, 'LIVES', lbl)
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
     this.livesText = this.scene.add.text(cx - panelW / 4, r1 + 3, '♥ ' + this.lives, val('#ff5252', valSize))
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
 
-    this.scoreLbl = this.scene.add.text(cx + panelW / 4, r1 - 13, 'SKOR', lbl)
+    this.scoreLbl = this.scene.add.text(cx + panelW / 4, r1 - 13, 'SCORE', lbl)
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
     this.scoreText = this.scene.add.text(cx + panelW / 4, r1 + 3, '✦ ' + this.score, val('#ce93d8', valSize))
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
@@ -83,12 +83,12 @@ export default class HUD {
 
     // ========== Baris 3: WAKTU (kiri) + JIWA TERKOIN (kanan) ==========
     const r3 = panelY + 82;
-    this.timeLbl = this.scene.add.text(cx - panelW / 4, r3 - 12, 'WAKTU', lbl)
+    this.timeLbl = this.scene.add.text(cx - panelW / 4, r3 - 12, 'TIME', lbl)
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
     this.timeText = this.scene.add.text(cx - panelW / 4, r3 + 3, '00:00', val('#80deea', subSize))
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
 
-    this.coinLbl = this.scene.add.text(cx + panelW / 4, r3 - 12, 'JIWA', lbl)
+    this.coinLbl = this.scene.add.text(cx + panelW / 4, r3 - 12, 'ORBS', lbl)
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
     this.coinText = this.scene.add.text(cx + panelW / 4, r3 + 3, '✧ ' + this.collectedCoins + '/' + this.totalCoins, val('#80deea', subSize))
       .setOrigin(0.5).setScrollFactor(0).setDepth(50);
@@ -145,7 +145,7 @@ export default class HUD {
     this.pauseBtn.on('pointerout', () => this.pauseBtn.setFillStyle(0x37474f, 0.85));
 
     // ========== Versi di bawah layar ==========
-    this.versionText = this.scene.add.text(cx, H - 4, 'v17', {
+    this.versionText = this.scene.add.text(cx, H - 4, 'v19', {
       fontSize: '10px',
       color: '#555555',
       fontFamily: 'Arial'
@@ -154,7 +154,7 @@ export default class HUD {
     // ========== Desktop hint (pojok kanan-atas, desktop only) ==========
     if (!isMobile) {
       this.hintText = this.scene.add.text(W - 12, 12,
-        'P: Pause  |  R: Restart  |  M: Mute  |  WASD/Arrow: Gerak  |  Spasi: Lompat', {
+        'P: Pause  |  R: Restart  |  M: Mute  |  WASD/Arrow: Move  |  Space: Jump', {
         fontSize: '10px',
         color: '#cccccc',
         fontFamily: 'Arial',

@@ -109,7 +109,7 @@ export default class IntroScene extends Phaser.Scene {
   createButtons() {
     const btnStart = this.add.rectangle(300, 460, 240, 58, 0x311b92)
       .setStrokeStyle(3, 0xce93d8, 0.8).setInteractive({ useHandCursor: true });
-    this.add.text(300, 460, 'MULAI', {
+    this.add.text(300, 460, 'START', {
       fontSize: '28px',
       color: '#e0e0e0',
       fontFamily: 'Arial',
@@ -123,7 +123,7 @@ export default class IntroScene extends Phaser.Scene {
 
     const btnSelect = this.add.rectangle(300, 530, 240, 48, 0x263238)
       .setStrokeStyle(2, 0x80deea, 0.6).setInteractive({ useHandCursor: true });
-    this.add.text(300, 530, 'Pilih Level', {
+    this.add.text(300, 530, 'Select Level', {
       fontSize: '22px',
       color: '#e0e0e0',
       fontFamily: 'Arial',
@@ -139,7 +139,7 @@ export default class IntroScene extends Phaser.Scene {
     const W = this.cameras.main.width;
     const H = this.cameras.main.height;
 
-    this.add.text(300, 750, 'GrimPass — 100 Level — Dibuat dengan Phaser 3', {
+    this.add.text(300, 750, 'GrimPass — 100 Levels — Made with Phaser 3', {
       fontSize: '12px',
       color: '#5e35b1',
       fontFamily: 'Arial',
@@ -150,7 +150,7 @@ export default class IntroScene extends Phaser.Scene {
     const setBtn = this.add.rectangle(W - 50, H - 35, 130, 40, 0x37474f)
       .setStrokeStyle(2, 0x80deea, 0.4)
       .setInteractive({ useHandCursor: true });
-    this.add.text(W - 50, H - 35, '⚙ Suara', {
+    this.add.text(W - 50, H - 35, '⚙ Settings', {
       fontSize: '15px', color: '#b2ebf2', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 2
     }).setOrigin(0.5);

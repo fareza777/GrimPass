@@ -79,14 +79,14 @@ export default class GameScene extends Phaser.Scene {
         if (levels.length === 0) {
           this.showEmptyState();
         } else {
-          this.showError('Level ' + this.currentLevel + ' tidak ditemukan.');
+          this.showError('Level ' + this.currentLevel + ' not found.');
         }
         return;
       }
 
       // Validasi minimal data level
       if (!this.levelData.platforms || this.levelData.platforms.length === 0) {
-        this.showError('Level ' + this.currentLevel + ' tidak punya platform.');
+        this.showError('Level ' + this.currentLevel + ' has no platforms.');
         return;
       }
 
@@ -124,7 +124,7 @@ export default class GameScene extends Phaser.Scene {
       // v10: dengarkan event pause dari HTML button
       this.game.events.on('mobile-pause', this.togglePause, this);
 
-      // v17: BGM per level range + ambient abyss hum
+      // v19: BGM per level range + ambient abyss hum
       this._playBGMForLevel();
       music.playAmbient();
 
@@ -139,7 +139,7 @@ export default class GameScene extends Phaser.Scene {
         ' platforms=' + (this.levelData.platforms || []).length);
     } catch (err) {
       console.error('[GameScene v7] create() error:', err);
-      this.showError('Error di level ' + this.currentLevel + ': ' + (err && err.message ? err.message : err));
+      this.showError('Error at level ' + this.currentLevel + ': ' + (err && err.message ? err.message : err));
     }
   }
 
@@ -333,7 +333,7 @@ export default class GameScene extends Phaser.Scene {
 
     const bg = this.add.rectangle(cx, cy, Math.min(W - 40, 480), 220, 0x0d001a, 0.88)
       .setScrollFactor(0).setDepth(300).setStrokeStyle(2, 0x7c4dff, 0.6);
-    const title = this.add.text(cx, cy - 70, 'Kembali ke Menu?', {
+    const title = this.add.text(cx, cy - 70, 'Back to Menu?', {
       fontSize: (isMobile ? 22 : 26) + 'px',
       color: '#ce93d8',
       fontFamily: 'Arial',
@@ -341,7 +341,7 @@ export default class GameScene extends Phaser.Scene {
       stroke: '#000',
       strokeThickness: 4
     }).setOrigin(0.5).setScrollFactor(0).setDepth(301);
-    const sub = this.add.text(cx, cy - 35, 'Progress tingkat ini akan hilang.', {
+    const sub = this.add.text(cx, cy - 35, 'Progress for this level will be lost.', {
       fontSize: '14px',
       color: '#9fa8da',
       fontFamily: 'Arial',
@@ -353,7 +353,7 @@ export default class GameScene extends Phaser.Scene {
     const yaBtn = this.add.rectangle(cx - 70, cy + 30, 120, 48, 0x4527a0)
       .setStrokeStyle(2, 0xce93d8, 0.7)
       .setScrollFactor(0).setDepth(301).setInteractive({ useHandCursor: true });
-    const yaTxt = this.add.text(cx - 70, cy + 30, 'YA', {
+    const yaTxt = this.add.text(cx - 70, cy + 30, 'YES', {
       fontSize: '20px', color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 3
     }).setOrigin(0.5).setScrollFactor(0).setDepth(302);
@@ -369,7 +369,7 @@ export default class GameScene extends Phaser.Scene {
     const batalBtn = this.add.rectangle(cx + 70, cy + 30, 120, 48, 0x757575)
       .setStrokeStyle(2, 0xffffff, 0.5)
       .setScrollFactor(0).setDepth(301).setInteractive({ useHandCursor: true });
-    const batalTxt = this.add.text(cx + 70, cy + 30, 'BATAL', {
+    const batalTxt = this.add.text(cx + 70, cy + 30, 'CANCEL', {
       fontSize: '20px', color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 3
     }).setOrigin(0.5).setScrollFactor(0).setDepth(302);
@@ -697,7 +697,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     const titleSize = isMobile ? 28 : 34;
-    this.add.text(cx, cy - (isMobile ? 150 : 160), 'TINGKAT ' + this.currentLevel + ' TERLEWATI', {
+    this.add.text(cx, cy - (isMobile ? 150 : 160), 'LEVEL ' + this.currentLevel + ' CLEARED', {
       fontSize: titleSize + 'px',
       color: '#ce93d8',
       fontFamily: 'Arial',
@@ -706,7 +706,7 @@ export default class GameScene extends Phaser.Scene {
       strokeThickness: 5
     }).setOrigin(0.5).setScrollFactor(0).setDepth(100);
 
-    this.add.text(cx, cy - (isMobile ? 110 : 115), 'Skor: ' + this.score + '   Waktu: ' + this.formatTime(this.elapsedTime), {
+    this.add.text(cx, cy - (isMobile ? 110 : 115), 'Score: ' + this.score + '   Time: ' + this.formatTime(this.elapsedTime), {
       fontSize: (isMobile ? 17 : 20) + 'px',
       color: '#80deea',
       fontFamily: 'Arial',
@@ -718,11 +718,11 @@ export default class GameScene extends Phaser.Scene {
     // ====== Tombol "LANJUT" (mobile-friendly) ======
     let label;
     if (this.currentLevel === 100) {
-      label = 'Lanjut ke Penutup';
+      label = 'Continue to Ending';
     } else if (this.currentLevel % 10 === 0) {
-      label = 'Lanjut (Cerita)';
+      label = 'Continue (Story)';
     } else {
-      label = 'Lanjut Tingkat ' + (this.currentLevel + 1);
+      label = 'Continue Level ' + (this.currentLevel + 1);
     }
 
     const lanjutBtnY = isMobile ? cy - 50 : cy - 40;
@@ -748,11 +748,11 @@ export default class GameScene extends Phaser.Scene {
 
     // Tombol Ulangi & Menu
     const otherBtnY = isMobile ? lanjutBtnY + 60 : lanjutBtnY + 55;
-    this.makeMenuButton(cx, otherBtnY, 'Ulangi Tingkat', () => {
+    this.makeMenuButton(cx, otherBtnY, 'Restart Level', () => {
       this.cancelAutoAdvance();
       this.scene.start('GameScene', { level: this.currentLevel });
     }, 100);
-    this.makeMenuButton(cx, otherBtnY + 45, 'Menu Tingkat', () => {
+    this.makeMenuButton(cx, otherBtnY + 45, 'Level Menu', () => {
       this.cancelAutoAdvance();
       this.scene.start('LevelSelectScene');
     }, 100);
@@ -822,7 +822,7 @@ export default class GameScene extends Phaser.Scene {
         this.cancelAutoAdvance();
         return;
       }
-      this._autoAdvanceText.setText('Auto lanjut dalam ' + remaining + ' detik... (klik untuk skip)');
+      this._autoAdvanceText.setText('Auto-continuing in ' + remaining + ' seconds... (click to skip)');
       remaining -= 1;
       if (remaining < 0) {
         this.advanceToNext();
@@ -853,14 +853,14 @@ export default class GameScene extends Phaser.Scene {
     const cy = H / 2;
     const isMobile = W < 600 || this.sys.game.device.input.touch;
 
-    // v17: overlay tema gelap GrimPass (ungu/merah)
+    // v19: overlay tema gelap GrimPass (ungu/merah)
     const ovW = Math.min(W - 40, 560);
     const ovH = Math.min(H - 40, 380);
     const ov = this.add.rectangle(cx, cy, ovW, ovH, 0x0d001a, 0.88)
       .setScrollFactor(0).setDepth(99)
       .setStrokeStyle(3, 0xff5252, 0.7);
 
-    this.add.text(cx, cy - (isMobile ? 130 : 145), 'JIWA PADAM', {
+    this.add.text(cx, cy - (isMobile ? 130 : 145), 'SOUL LOST', {
       fontSize: (isMobile ? 40 : 52) + 'px',
       color: '#ff5252',
       fontFamily: 'Arial',
@@ -869,7 +869,7 @@ export default class GameScene extends Phaser.Scene {
       strokeThickness: 6
     }).setOrigin(0.5).setScrollFactor(0).setDepth(100);
 
-    this.add.text(cx, cy - (isMobile ? 85 : 95), 'Skor: ' + this.score, {
+    this.add.text(cx, cy - (isMobile ? 85 : 95), 'Score: ' + this.score, {
       fontSize: (isMobile ? 18 : 22) + 'px',
       color: '#80deea',
       fontFamily: 'Arial',
@@ -878,7 +878,7 @@ export default class GameScene extends Phaser.Scene {
       strokeThickness: 3
     }).setOrigin(0.5).setScrollFactor(0).setDepth(100);
 
-    // v17: tombol lebih besar & jelas. 3 opsi: lanjut, ulangi, menu
+    // v19: tombol lebih besar & jelas. 3 opsi: lanjut, ulangi, menu
     const btnW = isMobile ? W - 80 : 280;
     const btnH = isMobile ? 52 : 48;
     const gap = isMobile ? 8 : 10;
@@ -889,7 +889,7 @@ export default class GameScene extends Phaser.Scene {
       .setScrollFactor(0).setDepth(101)
       .setStrokeStyle(3, 0xce93d8, 0.7)
       .setInteractive({ useHandCursor: true });
-    this.add.text(cx, startY, 'LANJUT (+1 JIWA)', {
+    this.add.text(cx, startY, 'CONTINUE (+1 LIFE)', {
       fontSize: (isMobile ? 18 : 18) + 'px',
       color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 3
@@ -908,7 +908,7 @@ export default class GameScene extends Phaser.Scene {
       .setScrollFactor(0).setDepth(101)
       .setStrokeStyle(3, 0x80deea, 0.7)
       .setInteractive({ useHandCursor: true });
-    this.add.text(cx, startY + btnH + gap, 'ULANGI DARI 0 (5 JIWA)', {
+    this.add.text(cx, startY + btnH + gap, 'RESTART FROM 0 (5 LIVES)', {
       fontSize: (isMobile ? 18 : 18) + 'px',
       color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 3
@@ -926,7 +926,7 @@ export default class GameScene extends Phaser.Scene {
       .setScrollFactor(0).setDepth(101)
       .setStrokeStyle(3, 0xff8a80, 0.7)
       .setInteractive({ useHandCursor: true });
-    this.add.text(cx, startY + 2 * (btnH + gap), 'KEMBALI KE MENU', {
+    this.add.text(cx, startY + 2 * (btnH + gap), 'BACK TO MENU', {
       fontSize: (isMobile ? 18 : 18) + 'px',
       color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 3
@@ -974,7 +974,7 @@ export default class GameScene extends Phaser.Scene {
 
     const bg = this.add.rectangle(cx, cy, Math.min(W - 40, 560), Math.min(H - 40, 340), 0x0d001a, 0.85)
       .setScrollFactor(0).setDepth(200).setStrokeStyle(2, 0x7c4dff, 0.5);
-    const title = this.add.text(cx, cy - (isMobile ? 110 : 120), 'JEDA', {
+    const title = this.add.text(cx, cy - (isMobile ? 110 : 120), 'PAUSE', {
       fontSize: (isMobile ? 40 : 52) + 'px',
       color: '#ce93d8',
       fontFamily: 'Arial',
@@ -984,8 +984,8 @@ export default class GameScene extends Phaser.Scene {
     }).setOrigin(0.5).setScrollFactor(0).setDepth(201);
     this.pauseOverlay.push(bg, title);
 
-    this.makeMenuButton(cx, cy - 30, 'Lanjut', () => this.resumeGame(), 201);
-    this.makeMenuButton(cx, cy + 25, 'Ulangi', () => {
+    this.makeMenuButton(cx, cy - 30, 'Resume', () => this.resumeGame(), 201);
+    this.makeMenuButton(cx, cy + 25, 'Restart', () => {
       this.hidePauseOverlay();
       this.scene.start('GameScene', { level: this.currentLevel });
     }, 201);
@@ -1035,7 +1035,7 @@ export default class GameScene extends Phaser.Scene {
     this.scene.start('GameScene', { level: this.currentLevel });
   }
 
-  // ===== v17: BGM selection per level range (dark fantasy tracks) =====
+  // ===== v19: BGM selection per level range (dark fantasy tracks) =====
   _playBGMForLevel() {
     let track;
     if (this.currentLevel <= 30) track = 'passage';
@@ -1046,7 +1046,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   showEmptyState() {
-    this.add.text(300, 400, 'Belum ada level tersedia', {
+    this.add.text(300, 400, 'No levels available', {
       fontSize: '32px',
       color: '#ffffff',
       fontFamily: 'Arial',

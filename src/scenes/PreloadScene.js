@@ -37,14 +37,14 @@ export default class PreloadScene extends Phaser.Scene {
     try {
       this.createPixelArt();
     } catch (err) {
-      this.showError('Gagal membuat aset: ' + (err && err.message ? err.message : err));
+      this.showError('Failed to create assets: ' + (err && err.message ? err.message : err));
       return;
     }
 
     const cx = this.cameras.main.width / 2;
     const cy = this.cameras.main.height / 2;
 
-    this.add.text(cx, cy - 20, 'Memuat...', {
+    this.add.text(cx, cy - 20, 'Loading...', {
       fontSize: '32px',
       color: '#b2ebf2',
       fontFamily: 'Arial'

@@ -75,7 +75,7 @@ export default class EndingScene extends Phaser.Scene {
     }).setOrigin(0.5);
 
     // statistik
-    this.add.text(300, 480, 'Skor Akhir', {
+    this.add.text(300, 480, 'Final Score', {
       fontSize: '20px',
       color: '#9fa8da',
       fontFamily: 'Arial',
@@ -93,7 +93,7 @@ export default class EndingScene extends Phaser.Scene {
       strokeThickness: 4
     }).setOrigin(0.5);
 
-    this.add.text(300, 575, 'Waktu: ' + formatTime(this.elapsedTime), {
+    this.add.text(300, 575, 'Time: ' + formatTime(this.elapsedTime), {
       fontSize: '22px',
       color: '#80deea',
       fontFamily: 'Arial',
@@ -105,7 +105,7 @@ export default class EndingScene extends Phaser.Scene {
     // tombol kembali
     const btn = this.add.rectangle(300, 680, 260, 52, 0x311b92)
       .setStrokeStyle(2, 0xce93d8, 0.7).setInteractive({ useHandCursor: true });
-    this.add.text(300, 680, 'Kembali ke Menu', {
+    this.add.text(300, 680, 'Back to Menu', {
       fontSize: '20px',
       color: '#e0e0e0',
       fontFamily: 'Arial',

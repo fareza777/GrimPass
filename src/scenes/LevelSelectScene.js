@@ -44,7 +44,7 @@ export default class LevelSelectScene extends Phaser.Scene {
   }
 
   createTitle() {
-    this.add.text(300, 50, 'PILIH LEVEL', {
+    this.add.text(300, 50, 'SELECT LEVEL', {
       fontSize: '40px',
       color: '#ce93d8',
       fontFamily: 'Arial',
@@ -94,7 +94,7 @@ export default class LevelSelectScene extends Phaser.Scene {
         strokeThickness: 2
       }).setOrigin(0, 0.5);
 
-      const statusText = completed ? ('Selesai  ✦' + bestScore) : 'Belum';
+      const statusText = completed ? ('Cleared  ✦' + bestScore) : 'Locked';
       const statusTxt = this.add.text(560, y, statusText, {
         fontSize: '13px',
         color: completed ? '#ce93d8' : '#78909c',
@@ -138,7 +138,7 @@ export default class LevelSelectScene extends Phaser.Scene {
     const setBtn = this.add.rectangle(W - 35, 28, 100, 38, 0x455a64)
       .setStrokeStyle(2, 0xffffff, 0.4)
       .setInteractive({ useHandCursor: true });
-    this.add.text(W - 35, 28, '⚙ Suara', {
+    this.add.text(W - 35, 28, '⚙ Settings', {
       fontSize: '15px', color: '#ffffff', fontFamily: 'Arial', fontStyle: 'bold',
       stroke: '#000', strokeThickness: 2
     }).setOrigin(0.5);
@@ -154,7 +154,7 @@ export default class LevelSelectScene extends Phaser.Scene {
     const totalLevels = levels.length;
     const completedCount = LevelManager.getCompletedLevels().length;
     this.add.text(300, 760,
-      'Ketuk level untuk masuk  |  ' + completedCount + ' / ' + totalLevels + ' terselesaikan',
+      'Tap a level to enter  |  ' + completedCount + ' / ' + totalLevels + ' cleared',
       {
         fontSize: '12px',
         color: '#9fa8da',

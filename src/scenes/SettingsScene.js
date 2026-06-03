@@ -79,7 +79,7 @@ export default class SettingsScene extends Phaser.Scene {
     }
 
     // ========== Judul ==========
-    this.add.text(cx, 90, 'PENGATURAN', {
+    this.add.text(cx, 90, 'SETTINGS', {
       fontSize: '40px',
       color: '#ce93d8',
       fontFamily: 'Arial',
@@ -88,7 +88,7 @@ export default class SettingsScene extends Phaser.Scene {
       strokeThickness: 5
     }).setOrigin(0.5);
 
-    this.add.text(cx, 130, 'Suara & Volume', {
+    this.add.text(cx, 130, 'Sound & Volume', {
       fontSize: '15px',
       color: '#9fa8da',
       fontFamily: 'Arial',
@@ -128,8 +128,8 @@ export default class SettingsScene extends Phaser.Scene {
     const r1Y = panelY + 55;
     this._addToggleRow(
       panelX + 30, r1Y, panelW - 60,
-      'MUSIK LATAR',
-      'Musik & ambient',
+      'BACKGROUND MUSIC',
+      'Music & ambient',
       this.bgmEnabled,
       (on) => {
         this.bgmEnabled = on;
@@ -146,8 +146,8 @@ export default class SettingsScene extends Phaser.Scene {
     const r2Y = panelY + 145;
     this._addToggleRow(
       panelX + 30, r2Y, panelW - 60,
-      'EFEK SUARA',
-      'Koin, lompat, musuh, dll',
+      'SOUND EFFECTS',
+      'Coin, jump, enemies, etc.',
       this.sfxEnabled,
       (on) => {
         this.sfxEnabled = on;
@@ -241,7 +241,7 @@ export default class SettingsScene extends Phaser.Scene {
     const btn = this.add.rectangle(cx, btnY, 220, 48, 0x4527a0)
       .setStrokeStyle(3, 0xce93d8, 0.7)
       .setInteractive({ useHandCursor: true });
-    this.add.text(cx, btnY, 'SIMPAN & KEMBALI', {
+    this.add.text(cx, btnY, 'SAVE & BACK', {
       fontSize: '18px',
       color: '#ffffff',
       fontFamily: 'Arial',
@@ -260,7 +260,7 @@ export default class SettingsScene extends Phaser.Scene {
 
     // Tombol Batal
     const cancelY = btnY + 58;
-    this.add.text(cx, cancelY, 'Batal', {
+    this.add.text(cx, cancelY, 'Cancel', {
       fontSize: '14px',
       color: '#9fa8da',
       fontFamily: 'Arial'
@@ -270,7 +270,7 @@ export default class SettingsScene extends Phaser.Scene {
       .on('pointerout', function() { this.setColor('#9fa8da'); });
 
     // Version
-    this.add.text(cx, H - 10, 'v17', {
+    this.add.text(cx, H - 10, 'v19', {
       fontSize: '10px',
       color: '#555555',
       fontFamily: 'Arial'
@@ -352,19 +352,19 @@ export default class SettingsScene extends Phaser.Scene {
 
   _updateStatus() {
     if (!this.bgmEnabled && !this.sfxEnabled) {
-      this.statusText.setText('Semua suara dimatikan');
+      this.statusText.setText('All sound is off');
       this.statusText.setColor('#9fa8da');
     } else if (this.volume === 0) {
-      this.statusText.setText('Volume 0% — tidak terdengar');
+      this.statusText.setText('Volume 0% — not audible');
       this.statusText.setColor('#9fa8da');
     } else if (this.bgmEnabled && this.sfxEnabled) {
-      this.statusText.setText('Musik & efek suara aktif');
+      this.statusText.setText('Music & sound effects active');
       this.statusText.setColor('#ce93d8');
     } else if (this.bgmEnabled) {
-      this.statusText.setText('Hanya musik latar yang aktif');
+      this.statusText.setText('Only background music active');
       this.statusText.setColor('#80deea');
     } else {
-      this.statusText.setText('Hanya efek suara yang aktif');
+      this.statusText.setText('Only sound effects active');
       this.statusText.setColor('#ce93d8');
     }
   }

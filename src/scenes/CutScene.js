@@ -48,7 +48,7 @@ export default class CutScene extends Phaser.Scene {
     fog.fillStyle(0x4a148c, 0.2);
     fog.fillEllipse(300, 760, 800, 220);
 
-    this.add.text(300, 110, 'BAB ' + Math.ceil(this.levelNumber / 10), {
+    this.add.text(300, 110, 'CHAPTER ' + Math.ceil(this.levelNumber / 10), {
       fontSize: '28px',
       color: '#80deea',
       fontFamily: 'Arial',
@@ -87,7 +87,7 @@ export default class CutScene extends Phaser.Scene {
     // panel untuk tombol
     const btn = this.add.rectangle(300, 680, 220, 52, 0x311b92)
       .setStrokeStyle(2, 0xce93d8, 0.7).setInteractive({ useHandCursor: true });
-    this.add.text(300, 680, 'Lanjut', {
+    this.add.text(300, 680, 'Continue', {
       fontSize: '24px',
       color: '#e0e0e0',
       fontFamily: 'Arial',
